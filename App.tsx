@@ -1,36 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StatusBar } from 'react-native'
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black
+} from '@expo-google-fonts/inter'
 
-interface ButtonProps {
-  title: string
-}
-
-function Button(props: ButtonProps) {
-  return (
-    <TouchableOpacity>
-      <Text>{props.title}</Text>
-    </TouchableOpacity>
-  )
-}
+import { Background } from './src/components/Background';
+import { Home } from './src/screens/Home';
+import { Loading } from './src/components/Loading';
 
 export default function App() {
+  const [fontsLoade] = useFonts({
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black
+  })
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Vai com Deus meu amor! s2</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Background>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
+      
+      {
+        fontsLoade ? <Home/> : <Loading />
+      }
+
+    </Background>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f1f1f1',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    color: "#000",
-    fontSize: 25,
-  }
-});
